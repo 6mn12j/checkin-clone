@@ -1,7 +1,8 @@
 import './App.css';
+import CheckInOut from './pages/CheckInOut';
 
 function App() {
-  return <div className="App">Hello</div>;
+  return <CheckInOut />;
 }
 
 export default App;
