@@ -1,0 +1,31 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 41%;
+}
+.h2 {
+  font-size: 1.2em;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  margin-top: 4px;
+}
+.label {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  z-index: 10;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  bottom: 36%;
+}
+.strong {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5em;
+}
+.chart {  
+  display: inline-block;
+  width: 48%;
+  height: 100%;
+  margin: 1%;
+}
