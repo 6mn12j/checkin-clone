@@ -1,6 +1,6 @@
-import styles from "../styles/Notice.module.css";
+import styles from "../styles/MainNotice.module.css";
 
-const Notice = () => {
+const MainNotice = () => {
   return (
     <section className={styles.notice}>
       <strong className={styles.strong}>운영 시간: 07:00 ~ 22:00</strong>
@@ -9,4 +9,4 @@ const Notice = () => {
   );
 }
 
-export default Notice;
+export default MainNotice;
