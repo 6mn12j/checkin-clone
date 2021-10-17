@@ -1,17 +1,17 @@
 import React from 'react';
-import styles from "../styles/EntryChart.module.css";
+import styles from "../styles/ClusterStatusChart.module.css";
 import { Doughnut } from 'react-chartjs-2';
 
-const EntryChart = ({ entry }) => {
+const ClusterStatusChart = ({ headCount }) => {
 
-  const { gaepo, maxCapGaepo, seocho, maxCapSeocho } = entry;
+  const { gaepo, maxCapGaepo, seocho, maxCapSeocho } = headCount;
 
   const dataGaepo = {
     datasets: [{
       data: [gaepo, maxCapGaepo - gaepo],
       backgroundColor: [
         'rgb(83, 227, 170)',
-        'rgba(83, 227, 173, 0.25)'
+        'rgba(83, 227, 173, 0.2)'
       ],
       hoverOffset: 4,
       borderWidth: 0,
@@ -23,7 +23,7 @@ const EntryChart = ({ entry }) => {
       data: [seocho, maxCapSeocho - seocho],
       backgroundColor: [
         'rgb(80, 200, 220)',
-        'rgba(80, 200, 220, 0.25)'
+        'rgba(80, 200, 220, 0.2)'
       ],
       hoverOffset: 4,
       borderWidth: 0,
@@ -34,34 +34,24 @@ const EntryChart = ({ entry }) => {
     <section className={styles.wrapper}>
       <div className={styles.chart}>
         <h2 className={styles.h2}>개포</h2>
-        <Doughnut
-          data={dataGaepo}
-          options= {{
-            responsive: true,
-            maintainAspectRatio: true,
-            cutout: 46,
-          }}
-         />
+        <Doughnut data={dataGaepo} options= {{cutout: '77%'}} />
         <span className={styles.label}>
-          <strong className={styles.strong}>{gaepo}</strong> / {maxCapGaepo}
+          <span>
+            <strong className={styles.strong}>{gaepo}</strong> / {maxCapGaepo}
+          </span>
         </span>
       </div>
       <div className={styles.chart}>
         <h2 className={styles.h2}>서초</h2>
-        <Doughnut
-          data={dataSeocho}
-          options= {{
-            responsive: true,
-            maintainAspectRatio: true,
-            cutout: 46,
-          }}
-         />
+        <Doughnut data={dataSeocho} options= {{cutout: '77%'}} />
         <span className={styles.label}>
-          <strong className={styles.strong}>{seocho}</strong> / {maxCapSeocho}
+          <span>
+            <strong className={styles.strong}>{seocho}</strong> / {maxCapSeocho}
+          </span>
         </span>
       </div>
     </section>
   );
 }
 
-export default EntryChart;
+export default ClusterStatusChart;

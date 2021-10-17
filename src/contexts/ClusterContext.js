@@ -1,9 +1,9 @@
 import { createContext, useState, useEffect } from 'react';
 
-const EntryContext = createContext({});
+const ClusterContext = createContext({});
 
-const EntryProvider = ({ children }) => {
-  const [entry, setEntry] = useState({
+const ClusterProvider = ({ children }) => {
+  const [headCount, setHeadCount] = useState({
     gaepo: 0,
     seocho: 0,
     maxCapGaepo: 0,
@@ -12,7 +12,7 @@ const EntryProvider = ({ children }) => {
 
   useEffect(() => {
     // async await 들어갈 자리
-    setEntry({
+    setHeadCount({
       gaepo: 24,
       seocho: 60,
       maxCapGaepo: 142,
@@ -21,14 +21,14 @@ const EntryProvider = ({ children }) => {
   }, []);
 
   return (
-    <EntryContext.Provider
+    <ClusterContext.Provider
       value={{
-        entry
+        headCount
       }}
     >
       {children}
-    </EntryContext.Provider>
+    </ClusterContext.Provider>
   );
 };
 
-export { EntryContext, EntryProvider };
+export { ClusterContext, ClusterProvider };

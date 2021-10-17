@@ -1,0 +1,31 @@
+.default {
+  width: 100%;
+  height: 48px;
+  border-radius: 4px;
+  background-color: rgb(83, 227, 173);
+  font-size: 1.2em;
+  color: #fff;
+  font-weight: 800;
+  border: 0;
+  cursor: pointer;
+}
+.default:hover {
+  background-color: rgb(102, 238, 188);
+}
+.default:active {
+  background-color: rgb(102, 238, 188);
+}
+.red {
+  background-color: rgb(235, 116, 124);
+}
+.red:hover {
+  background-color: rgb(240, 133, 140);
+}
+.red:active {
+  background-color: rgb(240, 133, 140);
+}
+button:disabled {
+  color: rgb(124, 126, 139);
+  background-color: rgb(171, 173, 184);
+  cursor: not-allowed;
+}

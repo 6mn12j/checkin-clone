@@ -1,3 +1,4 @@
+/* css reset */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -33,10 +34,11 @@ q:before, q:after {
 	content: '';
 	content: none;
 }
+/* App */
 body {
   margin: 0;
   padding: 0;
-  background-color: rgb(97, 97, 97);
+  background-color: rgb(39, 40, 46);
   color: rgba(255, 255, 255, 0.9);
   font-family: Helvetica, Arial, sans-serif;
 }
@@ -48,12 +50,7 @@ body {
   padding: 18px;
   background-color: #2D2E33;
   box-sizing: border-box;
-
-  width: 320px;
-  height: 568px;
-
-  /* width: 360px; */
-
-  /* width: 400px; */
-
+  width: 100%;
+  max-width: 480px;
+  height: 100vh;
 }
