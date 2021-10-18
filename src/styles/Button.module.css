@@ -1,31 +1,33 @@
 .default {
   width: 100%;
+  max-width: 360px;
   height: 48px;
+  margin: 0 auto;
   border-radius: 4px;
-  background-color: rgb(83, 227, 173);
+  background-color: var(--color-green);
+  color: var(--color-white);
   font-size: 1.2em;
-  color: #fff;
   font-weight: 800;
   border: 0;
   cursor: pointer;
 }
 .default:hover {
-  background-color: rgb(102, 238, 188);
+  background-color: var(--color-lightgreen);
 }
 .default:active {
-  background-color: rgb(102, 238, 188);
+  background-color: var(--color-lightgreen);
 }
 .red {
-  background-color: rgb(235, 116, 124);
+  background-color: var(--color-red);
 }
 .red:hover {
-  background-color: rgb(240, 133, 140);
+  background-color: var(--color-lightred);
 }
 .red:active {
-  background-color: rgb(240, 133, 140);
+  background-color: var(--color-lightred);
 }
 button:disabled {
-  color: rgb(124, 126, 139);
-  background-color: rgb(171, 173, 184);
+  color: var(--color-gray);
+  background-color: var(--color-lightgray);
   cursor: not-allowed;
 }

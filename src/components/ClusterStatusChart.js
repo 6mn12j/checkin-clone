@@ -10,8 +10,8 @@ const ClusterStatusChart = ({ headCount }) => {
     datasets: [{
       data: [gaepo, maxCapGaepo - gaepo],
       backgroundColor: [
-        'rgb(83, 227, 170)',
-        'rgba(83, 227, 173, 0.2)'
+        'rgb(74, 226, 170)',
+        'rgba(74, 226, 170, 0.2)'
       ],
       hoverOffset: 4,
       borderWidth: 0,
@@ -22,8 +22,8 @@ const ClusterStatusChart = ({ headCount }) => {
     datasets: [{
       data: [seocho, maxCapSeocho - seocho],
       backgroundColor: [
-        'rgb(80, 200, 220)',
-        'rgba(80, 200, 220, 0.2)'
+        'rgb(88, 210, 231)',
+        'rgba(88, 210, 231, 0.2)'
       ],
       hoverOffset: 4,
       borderWidth: 0,
