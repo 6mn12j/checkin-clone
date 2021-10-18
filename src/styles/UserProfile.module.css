@@ -1,0 +1,40 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.img {
+  display: inline-block;
+  background-color: #f4f4f5;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 10px 10px 16px;
+}
+
+.id {
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 18px;
+  text-transform: uppercase;
+  margin-right: 10px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.online {
+  width: 11px;
+  height: 11px;
+  background-color: #53e3ad;
+  border-radius: 15px;
+}
+.cursus {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+}

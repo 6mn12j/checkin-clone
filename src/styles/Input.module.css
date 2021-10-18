@@ -1,0 +1,12 @@
+.checkin-input {
+  display: inline-block;
+  /* width: 180px; */
+  height: 36px;
+  margin-bottom: 16px;
+  font-size: 17px;
+  text-align: center;
+  border: 0;
+  color: rgba(45, 46, 51, 0.2);
+  border-bottom: 2px solid rgba(45, 46, 51, 0.2);
+  margin: 36px 0;
+}

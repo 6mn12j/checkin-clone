@@ -1,0 +1,17 @@
+.wrapper {
+  width: 100%;
+  padding: 3px;
+}
+.checkbox {
+  margin: 10px auto;
+  color: #c4c4c4;
+  margin-right: 7px;
+}
+
+.text {
+  font-size: 15px;
+  display: block;
+  color: #2d2e33;
+  width: '50%';
+  margin-bottom: 11px;
+}
