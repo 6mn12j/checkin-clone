@@ -36,22 +36,23 @@ q:before, q:after {
 }
 /* App */
 :root {
-  --color-black: rgb(46, 47, 51);
-  --color-lightgreen: rgb(92, 235, 182);
-  --color-green: rgb(74, 226, 170);
-  --color-lightred: rgb(251, 138, 146);
-  --color-red: rgb(242, 119, 126);
-  --color-orange: rgb(255, 197, 84);
-  --color-skyblue: rgb(88, 210, 231);
-  --color-lightgray: rgb(187, 189, 202);
-  --color-gray: rgb(124, 126, 139); 
-  --color-darkgray: rgb(95, 96, 109); 
-  --color-snow: rgb(244, 244, 245);
+  --white: rgb(255, 255, 255);
+  --black: rgb(46, 47, 51);
+  --lightgreen: rgb(92, 235, 182);
+  --green: rgb(74, 226, 170);
+  --lightred: rgb(251, 138, 146);
+  --red: rgb(242, 119, 126);
+  --orange: rgb(255, 197, 84);
+  --skyblue: rgb(88, 210, 231);
+  --lightgray: rgb(187, 189, 202);
+  --gray: rgb(124, 126, 139); 
+  --darkgray: rgb(95, 96, 109); 
+  --snow: rgb(244, 244, 245);
 }
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--color-black);
+  background-color: var(--black);
   color: rgba(255, 255, 255, 0.9);
   font-family: Helvetica, Arial, sans-serif;
 }
@@ -61,7 +62,7 @@ body {
   justify-content: space-between;
   margin: 0 auto;
   padding: 18px;
-  background-color: var(--color-black);
+  background-color: var(--black);
   box-sizing: border-box;
   width: 100%;
   max-width: 560px;

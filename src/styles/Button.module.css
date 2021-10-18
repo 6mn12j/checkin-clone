@@ -4,32 +4,32 @@
   height: 48px;
   margin: 0 auto;
   border-radius: 4px;
-  color: var(--color-white);
+  color: var(--white);
   font-size: 1.2em;
   font-weight: 800;
   border: 0;
   cursor: pointer;
 }
 .green {
-  background-color: var(--color-green);
+  background-color: var(--green);
 }
 .green:hover {
-  background-color: var(--color-lightgreen);
+  background-color: var(--lightgreen);
 }
 .green:active {
-  background-color: var(--color-lightgreen);
+  background-color: var(--lightgreen);
 }
 .red {
-  background-color: var(--color-red);
+  background-color: var(--red);
 }
 .red:hover {
-  background-color: var(--color-lightred);
+  background-color: var(--lightred);
 }
 .red:active {
-  background-color: var(--color-lightred);
+  background-color: var(--lightred);
 }
 .button:disabled {
-  color: var(--color-gray);
-  background-color: var(--color-lightgray);
+  color: var(--gray);
+  background-color: var(--lightgray);
   cursor: not-allowed;
 }
