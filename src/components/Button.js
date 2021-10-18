@@ -1,17 +1,15 @@
 import React from 'react';
 import styles from "../styles/Button.module.css";
+import classNames from 'classnames/bind';
 
-const Button = ({ disabled, onClick, text }) => {
-  let className = styles.default;
-  if ( text === "CHECK OUT") {
-    className = `${styles.default} ${styles.red}`
-  }
+const Button = ({ color = 'green', disabled, onClick, text }) => {
+  let cx = classNames.bind(styles);
   return (
     <>
       <button
+        className={cx('button', color)}
         disabled={disabled}
-        onClick={onClick}
-        className={className}>
+        onClick={onClick}>
           {text}
       </button>
     </>
