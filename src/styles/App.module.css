@@ -1,0 +1,69 @@
+/* css reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+/* App */
+:root {
+  --color-black: rgb(46, 47, 51);
+  --color-lightgreen: rgb(92, 235, 182);
+  --color-green: rgb(74, 226, 170);
+  --color-lightred: rgb(251, 138, 146);
+  --color-red: rgb(242, 119, 126);
+  --color-orange: rgb(255, 197, 84);
+  --color-skyblue: rgb(88, 210, 231);
+  --color-lightray: rgb(187, 189, 202);
+  --color-gray: rgb(124, 126, 139); 
+  --color-darkgray: rgb(95, 96, 109); 
+  --color-snow: rgb(244, 244, 245);
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-black);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: Helvetica, Arial, sans-serif;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 18px;
+  background-color: var(--color-black);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 560px;
+  height: 100vh;
+}
