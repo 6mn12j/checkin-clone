@@ -47,8 +47,14 @@ const StatusBoard = () => {
 
   useEffect(() => {
     setClusterCongestion({
-      gaepo: getClusterCongestion(headCount.gaepo, headCount.maxCapGaepo),
-      seocho: getClusterCongestion(headCount.seocho, headCount.maxCapSeocho),
+      gaepoCongestion: getClusterCongestion(
+        headCount.gaepo,
+        headCount.maxCapGaepo,
+      ),
+      seochoCongestion: getClusterCongestion(
+        headCount.seocho,
+        headCount.maxCapSeocho,
+      ),
     });
   }, [headCount]);
 
