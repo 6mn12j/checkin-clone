@@ -1,0 +1,23 @@
+.wrap {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.title {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.count {
+  font-size: 1em;
+  display: inline-block;
+  color: var(--white);
+  margin-left: 10px;
+  margin-right: 6px;
+}

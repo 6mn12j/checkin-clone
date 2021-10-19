@@ -1,0 +1,123 @@
+.subHeader {
+  text-align: start;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.card {
+  background-color: var(--white);
+  width: 100%;
+  min-height: 32.125em;
+  height: 90%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.logo {
+  position: absolute;
+  width: 51px;
+  height: 35px;
+  left: 25px;
+  top: 30px;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: var(--white);
+  padding: 20px;
+}
+
+.infoWrapper {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 280px;
+  padding: 24px 0;
+  background-color: var(--snow);
+  width: 90%;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.875em;
+  color: var(--gray);
+  opacity: 0.6;
+  text-align: center;
+}
+
+.flexDiv {
+  display: flex;
+}
+
+/*Checkin*/
+
+.detail {
+  font-size: 0.875em;
+  line-height: 18px;
+  padding: 7px 9px;
+  letter-spacing: -0.3px;
+  color: var(--green);
+  margin-bottom: 0.4em;
+  box-sizing: border-box;
+}
+
+.cardNumInput {
+  display: inline-block;
+  /* width: 180px; */
+  height: 36px;
+  margin-bottom: 16px;
+  font-size: 1em;
+  text-align: center;
+  border: 0;
+  color: var(--lightgray);
+  border-bottom: 2px solid var(--lightgray);
+  margin: 36px 0;
+}
+
+.checkinCheckbox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/*Checkout*/
+
+.cardInfo {
+  text-align: center;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: inherit;
+}
+
+.cardTitle {
+  font-size: 0.875em;
+  text-align: center;
+  letter-spacing: -0.3px;
+  color: var(--black);
+  margin-bottom: 10px;
+}
+
+.cardNumber {
+  font-weight: 800;
+  font-size: 2.875em;
+  text-align: center;
+  letter-spacing: -0.3px;
+  color: var(--black);
+}

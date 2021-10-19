@@ -1,0 +1,36 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.img {
+  display: inline-block;
+  background-color: var(--snow);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 10px 10px 16px;
+}
+
+.id {
+  font-weight: 800;
+  font-size: 1.25em;
+  line-height: 18px;
+  text-transform: uppercase;
+  margin-right: 10px;
+  color: var(--black);
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cursus {
+  font-weight: 500;
+  font-size: 0.875em;
+  line-height: 18px;
+  color: var(--black);
+}
