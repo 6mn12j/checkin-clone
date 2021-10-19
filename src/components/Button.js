@@ -4,7 +4,6 @@ import classNames from 'classnames/bind';
 
 const Button = ({ color = 'green', disabled, onClick, text }) => {
   let cx = classNames.bind(styles);
-
   return (
     <>
       <button
