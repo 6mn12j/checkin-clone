@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import styles from '../styles/Checkbox.module.css';
-import classNames from 'classnames/bind';
 
 const Checkbox = ({ className, text, isChecked, handleChange, children }) => {
-  let cx = classNames.bind(styles);
-
   return (
-    <label className={cx('text')}>
+    <label className={styles.text}>
       <input
-        className={cx('checkbox')}
+        className={styles.checkbox}
         type="checkbox"
         checked={isChecked}
         onChange={handleChange}

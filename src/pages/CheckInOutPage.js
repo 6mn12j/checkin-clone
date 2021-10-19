@@ -12,7 +12,7 @@ function CheckInOutPage() {
   const [log, setLog] = useState({
     checkintime: 'PM 12:44',
   });
-  const [detailIsVisible, setStateDetailIsVisible] = useState(false);
+  const [detailIsVisible, setDetailIsVisible] = useState(false);
   const [status, setStatus] = useState('in'); //userinfo의 cardNumber값으로 대체
   const [cardNumber, setcardNumber] = useState('');
   const [readySubmit, setReadySubmit] = useState(true); // 카드번호가 있는지, 방역수칙 동의함 체크에 따라서 ->button disalbed
@@ -36,7 +36,7 @@ function CheckInOutPage() {
 
   const showDetail = () => {
     console.log('방역수칙 자세하게 보여주기');
-    setStateDetailIsVisible(true);
+    setDetailIsVisible(true);
   };
 
   const inputChange = (e) => {

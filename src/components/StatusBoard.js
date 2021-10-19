@@ -3,15 +3,20 @@ import { CircleStatus } from './CircleStatus';
 import styles from '../styles/StatusBoard.module.css';
 const StatusBoard = () => {
   const [headCount, setHeadCount] = useState({
+    //개포, 서초 인원 수
     gaepo: 1,
     seocho: 1,
     maxCapGaepo: 142,
     maxCapSeocho: 142,
   });
-  const [clusterState, setClusterState] = useState({
-    gaepo: null,
-    seocho: null,
+
+  const [clusterCongestion, setClusterCongestion] = useState({
+    //개포, 서초 인원 수에 따른 혼잡도
+    gaepoCongestion: null,
+    seochoCongestion: null,
   });
+  const { gaepo, maxCapGaepo, seocho, maxCapSeocho } = headCount;
+  const { gaepoCongestion, seochoCongestion } = clusterCongestion;
 
   const getClusterCongestion = (current, max) => {
     const state = current / max;
@@ -41,27 +46,27 @@ const StatusBoard = () => {
   }, []);
 
   useEffect(() => {
-    setClusterState({
+    setClusterCongestion({
       gaepo: getClusterCongestion(headCount.gaepo, headCount.maxCapGaepo),
       seocho: getClusterCongestion(headCount.seocho, headCount.maxCapSeocho),
     });
   }, [headCount]);
-  // 개포 , 서초 인원수에 따른 상태값s
+
   return (
     <div className={styles.wrap}>
       <span className={styles.title}>
         개포
         <h3 className={styles.count}>
-          {headCount.gaepo} / {headCount.maxCapGaepo}
+          {gaepo} / {maxCapGaepo}
         </h3>
-        <CircleStatus color={clusterState.gaepo} />
+        <CircleStatus color={gaepoCongestion} />
       </span>
       <span className={styles.title}>
         서초
         <h3 className={styles.count}>
-          {headCount.seocho} / {headCount.maxCapSeocho}
+          {seocho} / {maxCapSeocho}
         </h3>
-        <CircleStatus color={clusterState.seocho} />
+        <CircleStatus color={seochoCongestion} />
       </span>
     </div>
   );
