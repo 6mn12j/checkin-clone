@@ -4,14 +4,13 @@
 }
 .checkbox {
   margin: 10px auto;
-  color: #c4c4c4;
+  color: var(--snow);
   margin-right: 7px;
 }
 
 .text {
   font-size: 15px;
   display: block;
-  color: #2d2e33;
+  color: var(--black);
   width: '50%';
-  margin-bottom: 11px;
 }

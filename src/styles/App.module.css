@@ -1,8 +1,4 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
+/* css reset */
 html,
 body,
 div,
@@ -91,7 +87,6 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
 article,
 aside,
 details,
@@ -104,10 +99,6 @@ menu,
 nav,
 section {
   display: block;
-}
-body {
-  line-height: 1;
-  font-family: Helvetica, sans-serif;
 }
 ol,
 ul {
@@ -124,17 +115,37 @@ q:after {
   content: '';
   content: none;
 }
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
+/* App */
+:root {
+  --white: rgb(255, 255, 255);
+  --black: rgb(46, 47, 51);
+  --lightgreen: rgb(92, 235, 182);
+  --green: rgb(74, 226, 170);
+  --lightred: rgb(251, 138, 146);
+  --red: rgb(242, 119, 126);
+  --orange: rgb(255, 197, 84);
+  --skyblue: rgb(88, 210, 231);
+  --lightgray: rgb(187, 189, 202);
+  --gray: rgb(124, 126, 139);
+  --darkgray: rgb(95, 96, 109);
+  --snow: rgb(244, 244, 245);
 }
-html {
-  background-color: #37373d;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--black);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: Helvetica, Arial, sans-serif;
 }
-
-.header {
-  font-weight: 800;
-  font-size: 22px;
-  line-height: 18px;
-  color: #fff;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 18px;
+  background-color: var(--black);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 560px;
+  height: 100vh;
 }

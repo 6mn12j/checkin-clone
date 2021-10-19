@@ -6,13 +6,13 @@
 }
 
 .green {
-  background-color: #53e3ad;
+  background-color: var(--green);
 }
 
 .red {
-  background-color: #ed767e;
+  background-color: var(--red);
 }
 
 .orange {
-  background-color: #ffd507;
+  background-color: var(--orange);
 }

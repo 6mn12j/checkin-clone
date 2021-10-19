@@ -7,9 +7,9 @@
 
 .img {
   display: inline-block;
-  background-color: #f4f4f5;
-  width: 150px;
-  height: 150px;
+  background-color: var(--snow);
+  width: 9.375em;
+  height: 9.375em;
   border-radius: 50%;
   margin: 10px 10px 16px;
 }
@@ -20,6 +20,7 @@
   line-height: 18px;
   text-transform: uppercase;
   margin-right: 10px;
+  color: var(--black);
 }
 .row {
   display: flex;
@@ -30,11 +31,13 @@
 .online {
   width: 11px;
   height: 11px;
-  background-color: #53e3ad;
+  background-color: var(--green);
   border-radius: 15px;
 }
+
 .cursus {
   font-weight: 500;
   font-size: 14px;
   line-height: 18px;
+  color: var(--black);
 }
