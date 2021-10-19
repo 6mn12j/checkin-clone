@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { CircleStatus } from './CircleStatus';
-import styles from '../styles/StatusBoard.module.css';
-const StatusBoard = () => {
+import { Circle } from './Circle';
+import styles from '../styles/ClusterStatusBoard.module.css';
+const ClusterStatusBoard = () => {
   const [headCount, setHeadCount] = useState({
     //개포, 서초 인원 수
     gaepo: 1,
@@ -65,17 +65,17 @@ const StatusBoard = () => {
         <h3 className={styles.count}>
           {gaepo} / {maxCapGaepo}
         </h3>
-        <CircleStatus color={gaepoCongestion} />
+        <Circle color={gaepoCongestion} />
       </span>
       <span className={styles.title}>
         서초
         <h3 className={styles.count}>
           {seocho} / {maxCapSeocho}
         </h3>
-        <CircleStatus color={seochoCongestion} />
+        <Circle color={seochoCongestion} />
       </span>
     </div>
   );
 };
 
-export default StatusBoard;
+export default ClusterStatusBoard;
