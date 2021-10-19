@@ -6,7 +6,7 @@ import StatusBoard from '../components/StatusBoard';
 import UserProfile from '../components/UserProfile';
 import { UserContext } from '../contexts/UserContext';
 import styles from '../styles/CheckInOutPage.module.css';
-
+import logo from '../images/42-logo-black.png';
 function CheckInOutPage() {
   const { userInfo } = useContext(UserContext);
   const [log, setLog] = useState({
@@ -14,7 +14,7 @@ function CheckInOutPage() {
   });
   const [detailIsVisible, setStateDetailIsVisible] = useState(false);
   const [status, setStatus] = useState('in'); //userinfo의 cardNumber값으로 대체
-  //const [cardNumber, setcardNumber] = useState(null); //userInfo의 cardNumber로 대체
+  const [cardNumber, setcardNumber] = useState('');
   const [readySubmit, setReadySubmit] = useState(true); // 카드번호가 있는지, 방역수칙 동의함 체크에 따라서 ->button disalbed
   const [isChecked, setChecked] = useState(false);
   const handleCheckinClick = () => {
@@ -39,11 +39,10 @@ function CheckInOutPage() {
     setStateDetailIsVisible(true);
   };
 
-  const handleSubmit = () => {
-    //cardNumber제출
-    //cardNumber가맞다면 setLog로 체크인 시간 업데이트 까지
-    console.log('handleSubmit');
+  const inputChange = (e) => {
+    setcardNumber(e.target.value);
   };
+
   useEffect(() => {
     //클러스터 정보
     const getFetchedData = () => {
@@ -57,7 +56,7 @@ function CheckInOutPage() {
       <header className={styles.subHeader}>CHECK IN</header>
       <StatusBoard />
       <div className={styles.card}>
-        <img className={styles.logo} alt="logo" src="img/42-logo-black.png" />
+        <img className={styles.logo} alt="logo" src={logo} />
         <UserProfile />
         {status === 'in' ? (
           <div className={styles.infoWrapper}>
@@ -69,7 +68,9 @@ function CheckInOutPage() {
               className={styles.cardNumInput}
               type="number"
               placeholder="Card Number"
-              handleSubmit={handleSubmit}
+              name="cardNum"
+              value={cardNumber}
+              onChange={inputChange}
             />
           </div>
         ) : (

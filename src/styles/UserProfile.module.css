@@ -8,15 +8,15 @@
 .img {
   display: inline-block;
   background-color: var(--snow);
-  width: 9.375em;
-  height: 9.375em;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   margin: 10px 10px 16px;
 }
 
 .id {
   font-weight: 800;
-  font-size: 20px;
+  font-size: 1.25em;
   line-height: 18px;
   text-transform: uppercase;
   margin-right: 10px;
@@ -28,16 +28,9 @@
   justify-content: space-between;
 }
 
-.online {
-  width: 11px;
-  height: 11px;
-  background-color: var(--green);
-  border-radius: 15px;
-}
-
 .cursus {
   font-weight: 500;
-  font-size: 14px;
+  font-size: 0.875em;
   line-height: 18px;
   color: var(--black);
 }
