@@ -17,13 +17,13 @@ const ClusterProvider = ({ children }) => {
       seocho: 60,
       maxCapGaepo: 142,
       maxCapSeocho: 142,
-    })
+    });
   }, []);
 
   return (
     <ClusterContext.Provider
       value={{
-        headCount
+        headCount,
       }}
     >
       {children}

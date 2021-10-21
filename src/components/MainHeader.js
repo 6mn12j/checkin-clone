@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "../styles/MainHeader.module.css";
+import styles from '../styles/MainHeader.module.css';
 
 const MainHeader = () => {
   return (
@@ -10,6 +10,6 @@ const MainHeader = () => {
       </header>
     </>
   );
-}
+};
 
 export default MainHeader;

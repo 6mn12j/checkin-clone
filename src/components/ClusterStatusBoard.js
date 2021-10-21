@@ -60,20 +60,24 @@ const ClusterStatusBoard = () => {
 
   return (
     <div className={styles.wrap}>
-      <span className={styles.title}>
-        개포
-        <h3 className={styles.count}>
-          {gaepo} / {maxCapGaepo}
-        </h3>
-        <Circle color={gaepoCongestion} />
-      </span>
-      <span className={styles.title}>
-        서초
-        <h3 className={styles.count}>
-          {seocho} / {maxCapSeocho}
-        </h3>
-        <Circle color={seochoCongestion} />
-      </span>
+      <div className={styles.item}>
+        <span className={styles.title}>
+          개포
+          <span className={styles.count}>
+            {gaepo} / {maxCapGaepo}
+          </span>
+          <Circle color={gaepoCongestion} />
+        </span>
+      </div>
+      <div className={styles.item}>
+        <span className={styles.title}>
+          서초
+          <span className={styles.count}>
+            {seocho} / {maxCapSeocho}
+          </span>
+          <Circle color={seochoCongestion} />
+        </span>
+      </div>
     </div>
   );
 };

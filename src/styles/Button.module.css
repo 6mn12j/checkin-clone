@@ -29,7 +29,7 @@
   background-color: var(--lightred);
 }
 .button:disabled {
-  color: var(--gray);
-  background-color: var(--lightgray);
+  color: var(--lightgray);
+  background-color: var(--darksnow);
   cursor: not-allowed;
 }
