@@ -1,4 +1,4 @@
-import styles from "../styles/MainNotice.module.css";
+import styles from '../styles/MainNotice.module.css';
 
 const MainNotice = () => {
   return (
@@ -7,6 +7,6 @@ const MainNotice = () => {
       <span>사회적 거리두기 단계에 따라 운영시간 변경 가능</span>
     </section>
   );
-}
+};
 
 export default MainNotice;

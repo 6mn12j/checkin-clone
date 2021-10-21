@@ -13,7 +13,7 @@ const LoginProvider = ({ children }) => {
   return (
     <LoginContext.Provider
       value={{
-        isLogin
+        isLogin,
       }}
     >
       {children}

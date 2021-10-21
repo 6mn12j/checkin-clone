@@ -1,16 +1,8 @@
-.wrapper {
-  width: 100%;
-  padding: 3px;
-}
 .checkbox {
-  margin: 10px auto;
-  color: var(--snow);
-  margin-right: 7px;
+  margin-right: 6px;
 }
-
 .text {
-  font-size: 15px;
-  display: block;
   color: var(--black);
-  width: '50%';
+  font-size: clamp(0.8em, 4vw, 1em);
+  letter-spacing: -0.02em;
 }

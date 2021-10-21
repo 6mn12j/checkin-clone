@@ -3,10 +3,10 @@
   justify-content: center;
   width: 100%;
   position: relative;
-  margin-bottom: 14%;
+  margin-bottom: 20%;
 }
 .h2 {
-  font-size: calc(1.1em + .5vw);
+  font-size: calc(1.1em + 0.5vw);
   color: rgba(255, 255, 255, 0.8);
   text-align: center;
   margin-top: 4px;
@@ -26,7 +26,7 @@
   color: rgba(255, 255, 255, 0.8);
   font-size: calc(1.3em + 1.4vw);
 }
-.chart {  
+.chart {
   display: inline-block;
   width: 48%;
   height: 100%;

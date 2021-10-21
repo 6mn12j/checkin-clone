@@ -1,23 +1,21 @@
 .wrap {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   width: 100%;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
   margin-bottom: 15px;
-  padding: 10px;
+  padding: 12px 14px;
   box-sizing: border-box;
 }
-
 .title {
+  position: relative;
+  display: inline-block;
+  font-size: 1em;
+  line-height: 1em;
   color: rgba(255, 255, 255, 0.5);
 }
-
 .count {
-  font-size: 1em;
-  display: inline-block;
-  color: var(--white);
-  margin-left: 10px;
-  margin-right: 6px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-left: 6px;
 }

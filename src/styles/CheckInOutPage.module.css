@@ -1,123 +1,82 @@
 .subHeader {
-  text-align: start;
   width: 100%;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+  font-weight: 800;
 }
 
-.card {
-  background-color: var(--white);
+.infoWrap {
   width: 100%;
-  min-height: 32.125em;
-  height: 90%;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  position: relative;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-.logo {
-  position: absolute;
-  width: 51px;
-  height: 35px;
-  left: 25px;
-  top: 30px;
-}
-
-.input-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background-color: var(--white);
-  padding: 20px;
-}
-
-.infoWrapper {
-  width: inherit;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .box {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 280px;
-  padding: 24px 0;
+  width: 100%;
+  padding: 5%;
   background-color: var(--snow);
-  width: 90%;
+  font-size: clamp(0.8em, 4vw, 0.9em);
+  line-height: 1.5em;
   text-align: center;
-  font-weight: 500;
-  font-size: 0.875em;
   color: var(--gray);
-  opacity: 0.6;
   text-align: center;
+  box-sizing: border-box;
 }
 
-.flexDiv {
+.btnWrap {
   display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 /*Checkin*/
 
-.detail {
-  font-size: 0.875em;
-  line-height: 18px;
-  padding: 7px 9px;
-  letter-spacing: -0.3px;
-  color: var(--green);
-  margin-bottom: 0.4em;
-  box-sizing: border-box;
-}
-
-.cardNumInput {
+.cardInput {
   display: inline-block;
-  /* width: 180px; */
-  height: 36px;
-  margin-bottom: 16px;
-  font-size: 1em;
+  height: 1.8em;
+  margin: 4% 0;
+  font-size: clamp(1em, 5vw, 1.6em);
   text-align: center;
   border: 0;
-  color: var(--lightgray);
-  border-bottom: 2px solid var(--lightgray);
-  margin: 36px 0;
+  border-bottom: 2px solid var(--darksnow);
 }
 
-.checkinCheckbox {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.cardInput:focus {
+  outline: none;
+  border-bottom: 2px solid var(--green);
+}
+
+.cardInput::placeholder {
+  color: var(--lightgray);
+}
+.checkWrap {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.checkDetail {
+  display: inline;
+  font-size: 0.8em;
+  letter-spacing: -0.01em;
+  color: var(--green);
+  box-sizing: border-box;
+  margin-left: 5px;
 }
 
 /*Checkout*/
 
 .cardInfo {
   text-align: center;
-  min-height: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: inherit;
 }
 
 .cardTitle {
-  font-size: 0.875em;
+  font-size: 0.8em;
   text-align: center;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.01em;
   color: var(--black);
-  margin-bottom: 10px;
+  margin-bottom: 4px;
 }
 
 .cardNumber {
+  font-size: clamp(1.8em, 11vw, 3.2em);
   font-weight: 800;
-  font-size: 2.875em;
-  text-align: center;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.01em;
   color: var(--black);
 }
