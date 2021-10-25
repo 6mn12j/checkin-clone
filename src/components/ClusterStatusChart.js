@@ -1,8 +1,10 @@
-import React from 'react';
+import { useContext } from 'react';
+import { ClusterContext } from '../contexts/ClusterContext';
 import styles from '../styles/ClusterStatusChart.module.css';
 import { Doughnut } from 'react-chartjs-2';
 
-const ClusterStatusChart = ({ headCount }) => {
+const ClusterStatusChart = () => {
+  const { headCount } = useContext(ClusterContext);
   const { gaepo, maxCapGaepo, seocho, maxCapSeocho } = headCount;
 
   const dataGaepo = {

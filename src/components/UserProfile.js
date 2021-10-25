@@ -8,9 +8,11 @@ const UserProfile = () => {
   const { userImage, userId, userCursus, cardNumber } = userInfo;
   return (
     <div className={styles.wrap}>
-      <div className={styles.imgmask}>
-        <img className={styles.img} alt="user" src={userImage} />
-      </div>
+      <img
+        className={styles.userImg}
+        alt="user"
+        src={userImage}
+      />
       <span className={styles.title}>
         <strong className={styles.id}>
           {userId}

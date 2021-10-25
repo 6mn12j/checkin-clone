@@ -1,23 +1,22 @@
-import { useContext } from 'react';
-import { ClusterContext } from '../contexts/ClusterContext';
 import MainHeader from '../components/MainHeader';
 import ClusterStatusChart from '../components/ClusterStatusChart';
 import Footer from '../components/Footer';
 import MainNotice from '../components/MainNotice';
 import Button from '../components/Button';
 
-const MainPage = () => {
-  const { headCount } = useContext(ClusterContext);
+const MainPage = ({ history }) => {
+  
   const intralogIn = () => {
     //42 로그인 페이지로 이동
-    window.location.href = 'https://profile.intra.42.fr/';
+    // window.location.href = 'https://profile.intra.42.fr/';
+    history.push('/checkin')
   };
   return (
     <>
       <MainHeader />
-      <ClusterStatusChart headCount={headCount} />
+      <ClusterStatusChart />
       <MainNotice />
-      <Button disabled={false} onClick={intralogIn} text="LOG IN" />
+      <Button onClick={intralogIn} text="LOG IN" />
       <Footer />
     </>
   );
