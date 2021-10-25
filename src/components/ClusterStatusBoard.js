@@ -34,7 +34,6 @@ const ClusterStatusBoard = () => {
     //async로 개포, 서초 인원수 가져오기
     const getFetchedData = async () => {
       //데이터 가져오고
-      console.log('fetch data');
       setHeadCount({
         gaepo: 12,
         seocho: 12,

@@ -1,10 +1,10 @@
 import { createContext, useState, useEffect } from 'react';
+import { getUserInfo } from '../api/api';
 
 const UserContext = createContext({});
 
 const UserProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({
-    userImage: '',
     userId: '',
     userCursus: '',
     cardNumber: null,
@@ -12,24 +12,12 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const fetcheData = async () => {
-      // async await 들어갈 자리
-      return {
-        userImage: '',
-        userId: '',
-        userCursus: '',
-        cardNumber: null,
-      };
+      const respones = await getUserInfo();
+      const { data } = respones.data;
+      setUserInfo({ ...data });
+      return;
     };
-    const fetchedData = fetcheData();
-    console.log(`fetchedData ${JSON.stringify(fetchedData)}`);
-    //const { userImage, userId, userCursus, cardNumber } = fetchedData;
-    setUserInfo({
-      userImage:
-        'https://ca.slack-edge.com/T039P7U66-U02030HEWK1-37eba79f5edf-512',
-      userId: 'minjupar',
-      userCursus: '42cursus',
-      cardNumber: '124',
-    });
+    fetcheData();
   }, []);
 
   return (
