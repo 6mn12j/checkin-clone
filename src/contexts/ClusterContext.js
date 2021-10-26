@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
 
 const ClusterContext = createContext({});
 
@@ -10,29 +9,9 @@ const ClusterProvider = ({ children }) => {
     maxCapGaepo: 150,
     maxCapSeocho: 150,
   });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  // useEffect(() => {
-  //   const fetchCluster = async () => {
-  //     try {
-  //       setLoading(true);
-  //       setError(null);
-  //       const response = await axios({
-	// 		  	method: "get",
-  //         url: "http://gpark.42cadet.kr/cluster/",
-  //       });
-  //       console.log(response.data);
-  //       setHeadCount(response.data);
-  //     } catch (e) {
-  //       setError(e);
-  //     }
-  //     setLoading(false);
-  //   };
-  //   fetchCluster();
-  // }, []);
 
   useEffect(() => {
+    // async await 들어갈 자리
     setHeadCount({
       gaepo: 24,
       seocho: 60,
@@ -45,8 +24,6 @@ const ClusterProvider = ({ children }) => {
     <ClusterContext.Provider
       value={{
         headCount,
-        loading,
-        error
       }}
     >
       {children}

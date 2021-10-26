@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
@@ -15,13 +15,16 @@ function CheckInOutPage() {
   });
   const [detailIsVisible, setDetailIsVisible] = useState(false);
   const [userStatus, setUserStatus] = useState('in'); //userinfo의 cardNumber값으로 대체
-  const [cardNumber, setcardNumber] = useState(null);
+  const [cardNumber, setcardNumber] = useState('');
+  const [readySubmit, setReadySubmit] = useState(true); // 카드번호가 있는지, 방역수칙 동의함 체크에 따라서 ->button disalbed
   const [isChecked, setChecked] = useState(false);
   const handleCheckinClick = () => {
+    if (readySubmit) {
       try {
         console.log('checkin');
         setUserStatus('out');
       } catch (e) {}
+    }
   };
   const handleCheckoutClick = () => {
     console.log('checkout');
@@ -40,6 +43,14 @@ function CheckInOutPage() {
   const inputChange = (e) => {
     setcardNumber(e.target.value);
   };
+
+  useEffect(() => {
+    //클러스터 정보
+    const getFetchedData = () => {
+      console.log('fetched');
+    };
+    getFetchedData();
+  }, []);
 
   return (
     <>
@@ -73,7 +84,7 @@ function CheckInOutPage() {
                 </span>
               </div>
               <Button
-                disabled={!cardNumber || !isChecked}
+                disabled={!isChecked}
                 color={'green'}
                 onClick={handleCheckinClick}
                 text={'CHECK IN'}
@@ -97,7 +108,7 @@ function CheckInOutPage() {
                 />
               </div>
               <Button
-                disabled={!cardNumber || !isChecked}
+                disabled={false}
                 color={'red'}
                 onClick={handleCheckoutClick}
                 text={'CHECK OUT'}
