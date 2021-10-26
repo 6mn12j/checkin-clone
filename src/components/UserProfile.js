@@ -1,20 +1,19 @@
-import React, { useContext, useState } from 'react';
-import { UserContext } from '../contexts/UserContext';
+import React, { useContext } from 'react';
 import styles from '../styles/UserProfile.module.css';
+import { UserContext } from '../contexts/UserContext';
 import { Circle } from './Circle';
 
 const UserProfile = () => {
   const { userInfo } = useContext(UserContext);
   const { userId, userCursus, cardNumber } = userInfo;
+
   return (
     <div className={styles.wrap}>
-      <div className={styles.imgmask}>
-        <img
-          className={styles.img}
-          alt="user"
-          src={`https://cdn.intra.42.fr/users/${userId}.jpg`}
-        />
-      </div>
+      <img
+        className={styles.userImg}
+        alt="user"
+        src={`https://cdn.intra.42.fr/users/${userId}.jpg`}
+      />
       <span className={styles.title}>
         <strong className={styles.id}>
           {userId}
