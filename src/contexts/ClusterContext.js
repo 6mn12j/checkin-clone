@@ -6,8 +6,8 @@ const ClusterProvider = ({ children }) => {
   const [headCount, setHeadCount] = useState({
     gaepo: 0,
     seocho: 0,
-    maxCapGaepo: 0,
-    maxCapSeocho: 0,
+    maxCapGaepo: 150,
+    maxCapSeocho: 150,
   });
 
   useEffect(() => {
