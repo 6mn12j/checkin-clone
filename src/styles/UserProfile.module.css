@@ -5,9 +5,9 @@
   flex-basis: 45%;
   text-align: center;
 }
-.imgmask {
-  width: calc(50px + 20vw);
-  height: calc(50px + 20vw);
+.userImg {
+  width: calc(38px + 24vw);
+  height: calc(38px + 24vw);
   max-width: 150px;
   max-height: 150px;
   margin: 10% 0 8%;

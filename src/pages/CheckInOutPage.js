@@ -1,29 +1,45 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
+import styles from '../styles/CheckInOutPage.module.css';
 
+import Card from '../components/Card';
 import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
-import ClusterStatusBoard from '../components/ClusterStatusBoard';
 import UserProfile from '../components/UserProfile';
-import Card from '../components/Card';
+import ClusterStatusBoard from '../components/ClusterStatusBoard';
+
 import { UserContext } from '../contexts/UserContext';
-import styles from '../styles/CheckInOutPage.module.css';
+
+const handleTimeFormat = (date) => {
+  if (date === null) return null;
+  const rowDate = new Date(date);
+  const hours =
+    rowDate.getHours() < 10 ? `0${rowDate.getHours()}` : rowDate.getHours();
+  const minutes =
+    rowDate.getMinutes() < 10
+      ? `0${rowDate.getMinutes()}`
+      : rowDate.getMinutes();
+  return `${hours}:${minutes}`;
+};
 
 function CheckInOutPage() {
   const { userInfo } = useContext(UserContext);
-  const [log, setLog] = useState({
-    checkintime: 'PM 12:44',
-  });
+  const checkInTime = useMemo(
+    () => handleTimeFormat(userInfo.createdAt),
+    [userInfo.createdAt],
+  );
+
   const [detailIsVisible, setDetailIsVisible] = useState(false);
   const [userStatus, setUserStatus] = useState('in'); //userinfo의 cardNumber값으로 대체
-  const [cardNumber, setcardNumber] = useState('');
-  const [readySubmit, setReadySubmit] = useState(true); // 카드번호가 있는지, 방역수칙 동의함 체크에 따라서 ->button disalbed
+  const [cardNumber, setcardNumber] = useState();
   const [isChecked, setChecked] = useState(false);
+
   const handleCheckinClick = () => {
-    if (readySubmit) {
-      try {
-        console.log('checkin');
-        setUserStatus('out');
-      } catch (e) {}
+    try {
+      console.log('handlecheckinclick');
+      setChecked(false);
+      setUserStatus('out');
+    } catch (e) {
+      console.warn(e);
     }
   };
   const handleCheckoutClick = () => {
@@ -45,13 +61,14 @@ function CheckInOutPage() {
   };
 
   useEffect(() => {
-    //클러스터 정보
-    const getFetchedData = () => {
+    //클러스터 정보 fetche
+    const fetchClusterData = async () => {
       console.log('fetched');
     };
-    getFetchedData();
+    fetchClusterData();
   }, []);
 
+  const { cardNumber: userCardNumber } = userInfo;
   return (
     <>
       <header className={styles.subHeader}>CHECK IN</header>
@@ -84,7 +101,7 @@ function CheckInOutPage() {
                 </span>
               </div>
               <Button
-                disabled={!isChecked}
+                disabled={!cardNumber || !isChecked}
                 color={'green'}
                 onClick={handleCheckinClick}
                 text={'CHECK IN'}
@@ -94,10 +111,10 @@ function CheckInOutPage() {
         ) : (
           <>
             <UserProfile />
-            <span className={styles.box}>체크인 시간: {log.checkintime}</span>
+            <span className={styles.box}>체크인 시간: {checkInTime}</span>
             <div className={styles.cardInfo}>
               <span className={styles.cardTitle}>CARD NUMBER</span>
-              <h2 className={styles.cardNumber}>474</h2>
+              <h2 className={styles.cardNumber}>{userCardNumber}</h2>
             </div>
             <div className={styles.btnWrap}>
               <div className={styles.checkWrap}>
@@ -108,7 +125,7 @@ function CheckInOutPage() {
                 />
               </div>
               <Button
-                disabled={false}
+                disabled={!cardNumber || !isChecked}
                 color={'red'}
                 onClick={handleCheckoutClick}
                 text={'CHECK OUT'}
