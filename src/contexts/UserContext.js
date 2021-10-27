@@ -9,11 +9,12 @@ const UserProvider = ({ children }) => {
     userCursus: '',
     cardNumber: null,
   });
-
+  const name = 'jihuhwan';
   useEffect(() => {
     const fetcheData = async () => {
-      const respones = await getUserInfo();
+      const respones = await getUserInfo(name);
       const { data } = respones.data;
+      console.log(data);
       setUserInfo({ ...data });
       return;
     };
