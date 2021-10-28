@@ -5,15 +5,11 @@ import { Circle } from './Circle';
 
 const UserProfile = () => {
   const { userInfo } = useContext(UserContext);
-  const { userId, userCursus, cardNumber } = userInfo;
+  const { userId, userCursus, cardNumber, userImage } = userInfo;
 
   return (
     <div className={styles.wrap}>
-      <img
-        className={styles.userImg}
-        alt="user"
-        src={`https://cdn.intra.42.fr/users/${userId}.jpg`}
-      />
+      <img className={styles.userImg} alt="user" src={userImage} />
       <span className={styles.title}>
         <strong className={styles.id}>
           {userId}
