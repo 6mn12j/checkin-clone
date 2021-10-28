@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styles from './styles/App.module.css';
 import { UserProvider } from './contexts/UserContext';
 import { ClusterProvider } from './contexts/ClusterContext';
