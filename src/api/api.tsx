@@ -5,6 +5,10 @@ const instance = axios.create({
   baseURL: API_URL,
 });
 
-export const getUserInfo = async (name) => {
+export const getUserInfo = async (name: string) => {
   return await instance.get(`/user?username=${name}`);
+};
+
+export const getClusterStatus = async () => {
+  return await instance.get('/cluster');
 };
