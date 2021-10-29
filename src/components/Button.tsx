@@ -1,8 +1,14 @@
-import React from 'react';
 import styles from '../styles/Button.module.css';
 import classNames from 'classnames/bind';
 
-const Button = ({ color = 'green', disabled, onClick, text }) => {
+type Props = {
+  color?: string;
+  disabled?: boolean;
+  onClick?: React.MouseEventHandler<Element>;
+  text?: string;
+}
+
+const Button = ({ color = 'green', disabled, onClick, text }: Props) => {
   let cx = classNames.bind(styles);
   return (
     <>

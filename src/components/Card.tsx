@@ -1,7 +1,11 @@
 import styles from '../styles/Card.module.css';
 import logo from '../images/42-logo-black.png';
 
-const Card = ({ children }) => {
+type Props =  {
+  children?: React.ReactNode;
+}
+
+const Card = ({ children }: Props) => {
   return (
     <>
       <div className={styles.card}>
