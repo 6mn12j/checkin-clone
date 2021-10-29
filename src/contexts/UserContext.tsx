@@ -2,9 +2,13 @@ import { createContext, useState, useEffect } from 'react';
 import { getUserInfo } from '../api/api';
 import userDefault from '../images/user-default.png';
 
+export type Props = {
+  children: React.ReactNode;
+};
+
 const UserContext = createContext({});
 
-const UserProvider = ({ children }) => {
+const UserProvider = ({ children }: Props) => {
   const [userInfo, setUserInfo] = useState({
     userId: '',
     userCursus: '',

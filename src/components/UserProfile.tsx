@@ -4,7 +4,8 @@ import { UserContext } from '../contexts/UserContext';
 import { Circle } from './Circle';
 
 const UserProfile = () => {
-  const { userInfo } = useContext(UserContext);
+  const { userInfo }: any = useContext(UserContext);
+
   const { userId, userCursus, cardNumber, userImage } = userInfo;
 
   return (
