@@ -19,6 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "prestart": "tsc",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -41,7 +42,7 @@
       "last 1 safari version"
     ]
   },
-  "description": "- 실행 방법   - git clone 받은 후   -npm install - tsc   - npm start",
+  "description": "",
   "main": "./dist/index.js",
   "devDependencies": {
     "@types/react-dom": "^17.0.10",
