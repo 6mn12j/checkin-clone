@@ -1,7 +1,14 @@
 import React from 'react';
 import styles from '../styles/Checkbox.module.css';
 
-const Checkbox = ({ text, isChecked, handleChange, children }) => {
+type Props = {
+  text: string;
+  checked: boolean;
+  isChecked?: boolean;
+  handleChange: () => void;
+  children?: React.ReactNode;
+};
+const Checkbox = ({ text, isChecked, handleChange, children }: Props) => {
   return (
     <label className={styles.text}>
       <input

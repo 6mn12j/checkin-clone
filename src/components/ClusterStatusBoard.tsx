@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Circle } from './Circle';
 import styles from '../styles/ClusterStatusBoard.module.css';
+import { ClusterContext } from '../contexts/ClusterContext';
+
 const ClusterStatusBoard = () => {
-  const [headCount, setHeadCount] = useState({
-    //개포, 서초 인원 수
-    gaepo: 1,
-    seocho: 1,
-    maxCapGaepo: 142,
-    maxCapSeocho: 142,
-  });
+  const { headCount }: any = useContext(ClusterContext);
+  const { gaepo, maxCapGaepo, seocho, maxCapSeocho } = headCount;
 
   const [clusterCongestion, setClusterCongestion] = useState({
     //개포, 서초 인원 수에 따른 혼잡도
-    gaepoCongestion: null,
-    seochoCongestion: null,
+    gaepoCongestion: '',
+    seochoCongestion: '',
   });
-  const { gaepo, maxCapGaepo, seocho, maxCapSeocho } = headCount;
   const { gaepoCongestion, seochoCongestion } = clusterCongestion;
 
-  const getClusterCongestion = (current, max) => {
+  const getClusterCongestion = (current: number, max: number) => {
     const state = current / max;
 
     if (state > 0.8) {
@@ -29,20 +25,6 @@ const ClusterStatusBoard = () => {
       return 'green';
     }
   };
-
-  useEffect(() => {
-    //async로 개포, 서초 인원수 가져오기
-    const getFetchedData = async () => {
-      //데이터 가져오고
-      setHeadCount({
-        gaepo: 12,
-        seocho: 12,
-        maxCapGaepo: 27,
-        maxCapSeocho: 142,
-      });
-    };
-    getFetchedData();
-  }, []);
 
   useEffect(() => {
     setClusterCongestion({

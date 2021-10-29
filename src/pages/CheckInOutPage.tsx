@@ -9,7 +9,7 @@ import ClusterStatusBoard from '../components/ClusterStatusBoard';
 
 import { UserContext } from '../contexts/UserContext';
 
-const handleTimeFormat = (date) => {
+const handleTimeFormat = (date: Date) => {
   if (date === null) return null;
   const rowDate = new Date(date);
   const hours =
@@ -22,7 +22,8 @@ const handleTimeFormat = (date) => {
 };
 
 function CheckInOutPage() {
-  const { userInfo } = useContext(UserContext);
+  const { userInfo }: any = useContext(UserContext);
+
   const checkInTime = useMemo(
     () => handleTimeFormat(userInfo.createdAt),
     [userInfo.createdAt],
@@ -56,17 +57,9 @@ function CheckInOutPage() {
     setDetailIsVisible(true);
   };
 
-  const inputChange = (e) => {
+  const inputChange = (e: any) => {
     setcardNumber(e.target.value);
   };
-
-  useEffect(() => {
-    //클러스터 정보 fetche
-    const fetchClusterData = async () => {
-      console.log('fetched');
-    };
-    fetchClusterData();
-  }, []);
 
   const { cardNumber: userCardNumber } = userInfo;
   return (
@@ -86,7 +79,7 @@ function CheckInOutPage() {
               type="number"
               placeholder="Card Number"
               name="cardNum"
-              value={cardNumber}
+              value={cardNumber || ''}
               onChange={inputChange}
             />
             <div className={styles.btnWrap}>
