@@ -8,3 +8,7 @@ const instance = axios.create({
 export const getUserInfo = async (name: string) => {
   return await instance.get(`/user?username=${name}`);
 };
+
+export const getClusterStatus = async () => {
+  return await instance.get('/cluster');
+};
