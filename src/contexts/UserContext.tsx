@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from 'react';
 import { getUserInfo } from '../api/api';
 import userDefault from '../images/user-default.png';
+import { decoding, getToken } from '../utils/utils';
 
 export type Props = {
   children: React.ReactNode;
@@ -15,7 +16,11 @@ const UserProvider = ({ children }: Props) => {
     cardNumber: null,
     userImage: userDefault,
   });
-  const name = 'jihuhwan';
+
+  //로그인 이후에 token 이있음. 지금은 token(쿠키)이없으면 gpark으로 그냥 넣음.
+  const name = document.cookie
+    ? decoding(getToken()).split(':')[1].split(',')[0].replace(/"/g, '')
+    : 'gpark';
 
   useEffect(() => {
     const fetcheData = async () => {
