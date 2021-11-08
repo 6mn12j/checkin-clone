@@ -48,4 +48,11 @@ Thumbs.db
 *.mov
 *.wmv
 
+# dotenv environment variables file
 .env
+
+# Build directory
+build/
+
+# Certificate file
+*.pem

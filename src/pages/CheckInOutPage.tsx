@@ -8,9 +8,12 @@ import UserProfile from '../components/UserProfile';
 import ClusterStatusBoard from '../components/ClusterStatusBoard';
 
 import { UserContext } from '../contexts/UserContext';
+import { checkIn, setCookie, setHeader } from '../api/api';
+import { useEffect } from 'react';
+import { decoding, getToken } from '../utils/utils';
 
-const handleTimeFormat = (date: Date) => {
-  if (date === null) return null;
+const handleTimeFormat = (date: Date): string => {
+  if (date === null) return '';
   const rowDate = new Date(date);
   const hours =
     rowDate.getHours() < 10 ? `0${rowDate.getHours()}` : rowDate.getHours();
@@ -28,27 +31,29 @@ function CheckInOutPage() {
     () => handleTimeFormat(userInfo.createdAt),
     [userInfo.createdAt],
   );
-
+  const [isChecked, setChecked] = useState(false);
   const [detailIsVisible, setDetailIsVisible] = useState(false);
   const [userStatus, setUserStatus] = useState('in'); //userinfo의 cardNumber값으로 대체
   const [cardNumber, setcardNumber] = useState();
-  const [isChecked, setChecked] = useState(false);
 
   const handleCheckinClick = () => {
     try {
       console.log('handlecheckinclick');
+      //벡에서 요청시 올바른 카드넘버가 맞으면 checkIN 아니면 올바른 카드넘버가 아닙니다 띄우기.
+      checkIn(cardNumber);
       setChecked(false);
       setUserStatus('out');
     } catch (e) {
       console.warn(e);
     }
   };
+
   const handleCheckoutClick = () => {
     console.log('checkout');
     setUserStatus('in');
   };
+
   const handleChecked = () => {
-    console.log('checked');
     setChecked(!isChecked);
   };
 
@@ -62,6 +67,14 @@ function CheckInOutPage() {
   };
 
   const { cardNumber: userCardNumber } = userInfo;
+
+  useEffect(() => {
+    const initCheckIn = async (): Promise<void> => {
+      userInfo.userId !== '' && (await setCookie(userInfo.userId));
+      setHeader(getToken());
+    };
+    initCheckIn();
+  }, [userInfo.userId]);
   return (
     <>
       <header className={styles.subHeader}>CHECK IN</header>
@@ -120,7 +133,7 @@ function CheckInOutPage() {
               <Button
                 disabled={!cardNumber || !isChecked}
                 color={'red'}
-                onClick={handleCheckoutClick}
+                onClick={() => handleCheckoutClick()}
                 text={'CHECK OUT'}
               />
             </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from '../styles/Checkbox.module.css';
-
 type Props = {
   text: string;
   checked: boolean;
