@@ -8,7 +8,7 @@ import UserProfile from '../components/UserProfile';
 import ClusterStatusBoard from '../components/ClusterStatusBoard';
 
 import { UserContext } from '../contexts/UserContext';
-import { checkIn, setCookie, setHeader } from '../api/api';
+import { checkIn, setCookie, setHeader, checkOut } from '../api/api';
 import { useEffect } from 'react';
 import { decoding, getToken } from '../utils/utils';
 
@@ -41,7 +41,7 @@ function CheckInOutPage() {
       console.log('handlecheckinclick');
       //벡에서 요청시 올바른 카드넘버가 맞으면 checkIN 아니면 올바른 카드넘버가 아닙니다 띄우기.
       checkIn(cardNumber);
-      setChecked(false);
+      setChecked(!isChecked);
       setUserStatus('out');
     } catch (e) {
       console.warn(e);
@@ -50,10 +50,14 @@ function CheckInOutPage() {
 
   const handleCheckoutClick = () => {
     console.log('checkout');
+    checkOut();
     setUserStatus('in');
+    setChecked(!isChecked);
   };
 
-  const handleChecked = () => {
+  const handleChecked = (e: any) => {
+    // const { target: { checked } } = e;
+    // console.log(checked);
     setChecked(!isChecked);
   };
 
@@ -75,6 +79,8 @@ function CheckInOutPage() {
     };
     initCheckIn();
   }, [userInfo.userId]);
+
+
   return (
     <>
       <header className={styles.subHeader}>CHECK IN</header>
@@ -131,7 +137,7 @@ function CheckInOutPage() {
                 />
               </div>
               <Button
-                disabled={!cardNumber || !isChecked}
+                disabled={!isChecked}
                 color={'red'}
                 onClick={() => handleCheckoutClick()}
                 text={'CHECK OUT'}
