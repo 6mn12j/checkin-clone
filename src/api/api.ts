@@ -10,7 +10,7 @@ export const setHeader = (jwtToken: string) => {
   instance.defaults.headers.common['X-42Cadet-Auth-Key'] = `${jwtToken}`;
 };
 
-export const getUserInfo = async (name: string) => {
+export const getUserInfo = async (name: string | null) => {
   return await instance.get(`/user?username=${name}`, {
     withCredentials: true,
   });
@@ -24,7 +24,7 @@ export const checkIn = async (cardNumber: number | undefined) => {
   return await instance.post(`/user/checkin?cardNumber=${cardNumber}`);
 };
 
-export const setCookie = async (name: string) => {
+export const setCookie = async (name: string | null) => {
   console.log('setcookie', name);
   return await instance.get(`mock-make-token/${name}`);
 };

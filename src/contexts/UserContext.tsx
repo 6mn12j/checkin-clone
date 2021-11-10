@@ -10,6 +10,7 @@ export type Props = {
 const UserContext = createContext({});
 
 const UserProvider = ({ children }: Props) => {
+  const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({
     userId: '',
     userCursus: '',
@@ -17,27 +18,32 @@ const UserProvider = ({ children }: Props) => {
     userImage: userDefault,
   });
 
-  //로그인 이후에 token 이있음. 지금은 token(쿠키)이없으면 gpark으로 그냥 넣음.
+  //로그인 이후에 token 이있음. 지금은 token(쿠키)이없으면 ''으로 그냥 넣음.
   const name = document.cookie
     ? decoding(getToken()).split(':')[1].split(',')[0].replace(/"/g, '')
-    : 'gpark';
+    : '';
 
   useEffect(() => {
-    const fetcheData = async () => {
-      const respones = await getUserInfo(name);
-      const { data } = respones.data;
-      setUserInfo({
-        ...data,
-        userImage: `https://cdn.intra.42.fr/users/${data.userId}.jpg`,
-      });
-      return;
-    };
-    fetcheData();
+    if (name) {
+      setLoading(true);
+      const fetcheData = async () => {
+        const respones = await getUserInfo(name);
+        const { data } = respones.data;
+        setUserInfo({
+          ...data,
+          userImage: `https://cdn.intra.42.fr/users/${data.userId}.jpg`,
+        });
+        setLoading(false);
+        return;
+      };
+      fetcheData();
+    }
   }, []);
 
   return (
     <UserContext.Provider
       value={{
+        loading,
         userInfo,
       }}
     >

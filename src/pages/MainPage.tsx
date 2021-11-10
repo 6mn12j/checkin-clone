@@ -1,23 +1,36 @@
+import { useContext, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+
 import MainHeader from '../components/MainHeader';
 import ClusterStatusChart from '../components/ClusterStatusChart';
 import Footer from '../components/Footer';
 import MainNotice from '../components/MainNotice';
 import Button from '../components/Button';
+import Pending from '../components/Pending';
+
+import { UserContext } from '../contexts/UserContext';
+import { setCookie } from '../api/api';
 
 const MainPage = ({ history }: RouteComponentProps) => {
-  
-  const intralogIn = () => {
-    //42 로그인 페이지로 이동
-    // window.location.href = 'https://profile.intra.42.fr/';
-    history.push('/checkin')
+
+  const { loading, userInfo }: any = useContext(UserContext);
+
+  useEffect(() => {
+    if (userInfo.userId !== '') history.push('/checkin');
+  });
+
+  const handleLogin = () => {
+    const user = prompt('유저 ID를 입력하세요');
+    setCookie(user);
   };
+ 
+  if (loading) return <Pending>로딩중입니다</Pending>;
   return (
     <>
       <MainHeader />
       <ClusterStatusChart />
       <MainNotice />
-      <Button onClick={intralogIn} text="LOG IN" />
+      <Button onClick={handleLogin} text="LOG IN" />
       <Footer />
     </>
   );

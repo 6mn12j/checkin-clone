@@ -1,0 +1,18 @@
+.logo {
+  display: inline-block;
+  width: 100%;
+  height: 60px;
+  background: url('../images/42-logo-white.png') center/contain no-repeat;
+  color: transparent;
+  opacity: .3;
+  margin-bottom: 20px;
+}
+.warp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.1em;
+  color: rgba(255, 255, 255, 0.5);
+}
