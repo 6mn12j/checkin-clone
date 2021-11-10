@@ -1,10 +1,10 @@
-import styles from '../styles/Pending.module.css';
+import styles from '../styles/Loading.module.css';
 
 type Props =  {
   children?: React.ReactNode;
 }
 
-const Pending = ({ children }: Props) => {
+const Loading = ({ children }: Props) => {
   return (
     <>
       <span className={styles.logo}>42 logo</span>
@@ -15,4 +15,4 @@ const Pending = ({ children }: Props) => {
   );
 };
 
-export default Pending;
+export default Loading;

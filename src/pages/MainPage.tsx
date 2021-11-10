@@ -6,7 +6,7 @@ import ClusterStatusChart from '../components/ClusterStatusChart';
 import Footer from '../components/Footer';
 import MainNotice from '../components/MainNotice';
 import Button from '../components/Button';
-import Pending from '../components/Pending';
+import Loading from '../components/Loading';
 
 import { UserContext } from '../contexts/UserContext';
 import { setCookie } from '../api/api';
@@ -24,7 +24,7 @@ const MainPage = ({ history }: RouteComponentProps) => {
     setCookie(user);
   };
  
-  if (loading) return <Pending>로딩중입니다</Pending>;
+  if (loading) return <Loading>로딩중입니다</Loading>;
   return (
     <>
       <MainHeader />
