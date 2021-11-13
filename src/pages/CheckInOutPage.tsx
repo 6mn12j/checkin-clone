@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import styles from '../styles/CheckInOutPage.module.css';
 
 import Card from '../components/Card';
@@ -7,10 +7,15 @@ import Checkbox from '../components/Checkbox';
 import UserProfile from '../components/UserProfile';
 import ClusterStatusBoard from '../components/ClusterStatusBoard';
 
-import { UserContext } from '../contexts/UserContext';
-import { checkIn, setCookie, setHeader, checkOut } from '../api/api';
+import {
+  UserState,
+  useUserDispatch,
+  useUserState,
+} from '../contexts/UserContext';
+import { checkIn, checkOut, testGetUserInfo } from '../api/api';
 import { useEffect } from 'react';
 import { decoding, getToken } from '../utils/utils';
+import { useHistory } from 'react-router-dom';
 
 const handleTimeFormat = (date: Date): string => {
   if (date === null) return '';
@@ -25,16 +30,26 @@ const handleTimeFormat = (date: Date): string => {
 };
 
 function CheckInOutPage() {
-  const { userInfo }: any = useContext(UserContext);
+  /* UserContext*/
+  const dispatch = useUserDispatch();
+  const userInfo = useUserState();
+  const setLogin = () => {
+    dispatch({ type: 'SET_LOGIN' });
+  };
+  const setUserInfo = (userInfo: UserState) => {
+    dispatch({ type: 'SET_USER_INFO', userInfo });
+  };
 
-  const checkInTime = useMemo(
-    () => handleTimeFormat(userInfo.createdAt),
-    [userInfo.createdAt],
-  );
+  const history = useHistory();
   const [isChecked, setChecked] = useState(false);
   const [detailIsVisible, setDetailIsVisible] = useState(false);
   const [userStatus, setUserStatus] = useState('in'); //userinfo의 cardNumber값으로 대체
   const [cardNumber, setcardNumber] = useState();
+  const { cardNumber: userCardNumber } = userInfo;
+
+  const checkInTime = useMemo(() => {
+    if (userInfo.createdAt !== null) handleTimeFormat(userInfo.createdAt);
+  }, [userInfo.createdAt]);
 
   const handleCheckinClick = () => {
     try {
@@ -56,8 +71,6 @@ function CheckInOutPage() {
   };
 
   const handleChecked = (e: any) => {
-    // const { target: { checked } } = e;
-    // console.log(checked);
     setChecked(!isChecked);
   };
 
@@ -70,16 +83,34 @@ function CheckInOutPage() {
     setcardNumber(e.target.value);
   };
 
-  const { cardNumber: userCardNumber } = userInfo;
-
   useEffect(() => {
-    const initCheckIn = async (): Promise<void> => {
-      userInfo.userId !== '' && (await setCookie(userInfo.userId));
-      setHeader(getToken());
-    };
-    initCheckIn();
-  }, [userInfo.userId]);
+    const fetchedData = async () => {
+      //local 테스트시 필요
+      const name = document.cookie
+        ? decoding(getToken()).split(':')[1].split(',')[0].replace(/"/g, '')
+        : '';
+      const response = await testGetUserInfo(name);
 
+      //서버용
+      // const response = await getUserInfo();
+
+      const { data } = response.data;
+      const userInfo = {
+        ...data,
+        userImage: `https://cdn.intra.42.fr/users/${data.username}.jpg`,
+      };
+      setUserInfo(userInfo);
+    };
+
+    if (document.cookie) {
+      //쿠키가 있으면 로그인 상태 -> 해당 쿠키값의(로그인한 유저의 ) 데이터를 가져온다
+      setLogin();
+      fetchedData();
+    } else {
+      //로그인 아닌 상태 home으로 리다이렉트
+      history.push('/');
+    }
+  }, []);
 
   return (
     <>

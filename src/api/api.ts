@@ -11,13 +11,18 @@ export const setHeader = (jwtToken: string) => {
   instance.defaults.headers.common['X-42Cadet-Auth-Key'] = `${jwtToken}`;
 };
 
-export const getUserInfo = async (name: string | null) => {
+//oauth붙고 jwt토큰 사용하면 사라질 test용 API
+export const testGetUserInfo = async (name: string | null) => {
   return await instance.get(`/user?username=${name}`);
+};
+
+export const getUserInfo = async () => {
+  return await instance.get('/user/token');
 };
 
 export const getClusterStatus = async () => {
   return await instance.get('/cluster', {
-    withCredentials:false,
+    withCredentials: false,
   });
 };
 
