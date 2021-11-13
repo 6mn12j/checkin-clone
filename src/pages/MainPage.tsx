@@ -26,7 +26,7 @@ const MainPage = ({ history }: RouteComponentProps) => {
     const user = prompt('유저 ID를 입력하세요');
     await setCookie(user);
     if (document.cookie) setLogin();
-    else window.alert('로컬 ..토큰 저장 실패');
+    else window.alert(' ..토큰 저장 실패');
   };
 
   return (

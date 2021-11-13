@@ -6,7 +6,7 @@ const getCookie = (): string => {
   return cookie;
 };
 
-export const getToken = (): string => {
+export const getTokenInCookie = (): string => {
   const cookie = getCookie();
   const start = cookie.indexOf('=');
   return cookie.substring(start + 1, cookie.length);
