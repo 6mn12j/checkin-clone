@@ -4,11 +4,7 @@
     "target": "ES5",
     "outDir": "./dist",
     "moduleResolution": "Node",
-    "lib": [
-      "ES2015",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2015", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -19,13 +15,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "strictNullChecks": false,
     "jsx": "react-jsx"
   },
-  "include": [
-    "./src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
