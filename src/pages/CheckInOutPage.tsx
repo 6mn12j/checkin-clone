@@ -12,10 +12,9 @@ import {
   useUserDispatch,
   useUserState,
 } from '../contexts/UserContext';
-import { checkIn, checkOut, getUserInfo, testGetUserInfo } from '../api/api';
+import { checkIn, checkOut, getUserInfo } from '../api/api';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { decoding, getTokenInCookie } from '../utils/utils';
 
 const handleTimeFormat = (date: string | Date): string => {
   if (date === null) return '';
