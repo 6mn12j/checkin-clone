@@ -1,6 +1,6 @@
 import styles from './styles/App.module.css';
-import { UserProvider } from './contexts/UserContext';
 import { ClusterProvider } from './contexts/ClusterContext';
+import { UserProvider } from './contexts/UserContext';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 

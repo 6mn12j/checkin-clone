@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 import styles from '../styles/CheckInOutPage.module.css';
 
 import Card from '../components/Card';
@@ -33,18 +33,21 @@ function CheckInOutPage() {
   /* UserContext*/
   const dispatch = useUserDispatch();
   const userInfo = useUserState();
-  const setLogin = () => {
+  const setLogin = useCallback(() => {
     dispatch({ type: 'SET_LOGIN' });
-  };
-  const setUserInfo = (userInfo: UserState) => {
+  }, [dispatch]);
+  const setLogout = useCallback(() => {
+    dispatch({ type: 'SET_LOGOUT' });
+  }, [dispatch]);
+  const setUserInfo = useCallback((userInfo: UserState) => {
     dispatch({ type: 'SET_USER_INFO', userInfo });
-  };
+  }, [dispatch]);
 
   const history = useHistory();
   const [isChecked, setChecked] = useState(false);
   const [detailIsVisible, setDetailIsVisible] = useState(false);
-  const [userStatus, setUserStatus] = useState('in'); //userinfo의 cardNumber값으로 대체
-  const [cardNumber, setcardNumber] = useState();
+  // const [userStatus, setUserStatus] = useState('in'); //userinfo의 cardNumber값으로 대체
+  const [cardNumber, setcardNumber] = useState(null);
 
   const checkInTime = useMemo(() => {
     if (userInfo.checkIn !== null) return handleTimeFormat(userInfo.checkIn);
@@ -56,7 +59,7 @@ function CheckInOutPage() {
       //벡에서 요청시 올바른 카드넘버가 맞으면 checkIN 아니면 올바른 카드넘버가 아닙니다 띄우기.
       await checkIn(cardNumber);
       setChecked(!isChecked);
-      setUserStatus('out');
+      fetchedData();
     } catch (e) {
       console.warn(e);
     }
@@ -67,7 +70,7 @@ function CheckInOutPage() {
     await checkOut();
     setChecked(!isChecked);
     setcardNumber(null);
-    setUserStatus('in');
+    fetchedData();
   };
 
   const handleChecked = (e: any) => {
@@ -83,7 +86,7 @@ function CheckInOutPage() {
     setcardNumber(e.target.value);
   };
 
-  const fetchedData = async () => {
+  const fetchedData = useCallback(async () => {
     // local 테스트시 필요
     // const name = document.cookie
     //   ? decoding(getTokenInCookie())
@@ -95,35 +98,36 @@ function CheckInOutPage() {
     // const response = await testGetUserInfo(name);
 
     //서버용;
-    const response = await getUserInfo();
-
-    const { data } = response.data;
-    const userInfo = {
-      ...data,
-      userImage: `https://cdn.intra.42.fr/users/${data.username}.jpg`,
-    };
-    setUserInfo(userInfo);
-  };
-
-  useEffect(() => {
-    fetchedData();
-
-    console.log('fetchedData', userInfo);
-  }, [userStatus]);
+    try {
+      const response = await getUserInfo();
+      const { data } = response.data;
+      const userInfo = {
+        ...data,
+        isLogin: true,
+      };
+      setUserInfo(userInfo);
+      console.log('fetchedData', userInfo);
+    } catch (e) {
+      console.log(e);
+    }
+  }, [setUserInfo]);
 
   useEffect(() => {
-    if (!document.cookie) history.push('/');
     //쿠키가 있으면 로그인 상태 -> 해당 쿠키값의(로그인한 유저의 ) 데이터를 가져온다
-    setLogin();
+    if (!document.cookie) {
+      history.push('/');
+      setLogout();
+    }
     fetchedData();
-  }, [history]);
+    setLogin();
+  }, [fetchedData, history, setLogin, setLogout]);
 
   return (
     <>
       <header className={styles.subHeader}>CHECK IN</header>
       <ClusterStatusBoard />
       <Card>
-        {userStatus === 'in' ? (
+        {!userInfo.cardNumber ? (
           <>
             <UserProfile />
             <div className={styles.box}>

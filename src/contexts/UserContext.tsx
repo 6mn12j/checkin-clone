@@ -7,9 +7,9 @@ export type Props = {
 };
 
 const initialState = {
-  username: '',
-  userCursus: '',
-  cardNumber: '',
+  username: '-',
+  userCursus: '-',
+  cardNumber: '-',
   userImage: userDefault,
   checkIn: '',
   checkOut: '',
