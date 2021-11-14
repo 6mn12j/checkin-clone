@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import styles from '../styles/UserProfile.module.css';
 import { UserState, useUserState } from '../contexts/UserContext';
 import { Circle } from './Circle';
@@ -6,7 +5,6 @@ import { Circle } from './Circle';
 const UserProfile = () => {
   const userInfo: UserState = useUserState();
   const { username, userCursus, cardNumber, userImage } = userInfo;
-  useEffect(() => {}, [userInfo]);
   return (
     <div className={styles.wrap}>
       <img className={styles.userImg} alt="user" src={userImage} />
