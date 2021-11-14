@@ -12,14 +12,14 @@ import {
   useUserDispatch,
   useUserState,
 } from '../contexts/UserContext';
-import { checkIn, checkOut, testGetUserInfo } from '../api/api';
+import { checkIn, checkOut, getUserInfo } from '../api/api';
 import { useEffect } from 'react';
-import { decoding, getToken } from '../utils/utils';
 import { useHistory } from 'react-router-dom';
 
-const handleTimeFormat = (date: Date): string => {
+const handleTimeFormat = (date: string | Date): string => {
   if (date === null) return '';
   const rowDate = new Date(date);
+
   const hours =
     rowDate.getHours() < 10 ? `0${rowDate.getHours()}` : rowDate.getHours();
   const minutes =
@@ -45,17 +45,16 @@ function CheckInOutPage() {
   const [detailIsVisible, setDetailIsVisible] = useState(false);
   const [userStatus, setUserStatus] = useState('in'); //userinfo의 cardNumber값으로 대체
   const [cardNumber, setcardNumber] = useState();
-  const { cardNumber: userCardNumber } = userInfo;
 
   const checkInTime = useMemo(() => {
-    if (userInfo.createdAt !== null) handleTimeFormat(userInfo.createdAt);
-  }, [userInfo.createdAt]);
+    if (userInfo.checkIn !== null) return handleTimeFormat(userInfo.checkIn);
+  }, [userInfo.checkIn]);
 
-  const handleCheckinClick = () => {
+  const handleCheckinClick = async () => {
     try {
       console.log('handlecheckinclick');
       //벡에서 요청시 올바른 카드넘버가 맞으면 checkIN 아니면 올바른 카드넘버가 아닙니다 띄우기.
-      checkIn(cardNumber);
+      await checkIn(cardNumber);
       setChecked(!isChecked);
       setUserStatus('out');
     } catch (e) {
@@ -63,11 +62,12 @@ function CheckInOutPage() {
     }
   };
 
-  const handleCheckoutClick = () => {
+  const handleCheckoutClick = async () => {
     console.log('checkout');
-    checkOut();
-    setUserStatus('in');
+    await checkOut();
     setChecked(!isChecked);
+    setcardNumber(null);
+    setUserStatus('in');
   };
 
   const handleChecked = (e: any) => {
@@ -83,34 +83,40 @@ function CheckInOutPage() {
     setcardNumber(e.target.value);
   };
 
-  useEffect(() => {
-    const fetchedData = async () => {
-      //local 테스트시 필요
-      const name = document.cookie
-        ? decoding(getToken()).split(':')[1].split(',')[0].replace(/"/g, '')
-        : '';
-      const response = await testGetUserInfo(name);
+  const fetchedData = async () => {
+    // local 테스트시 필요
+    // const name = document.cookie
+    //   ? decoding(getTokenInCookie())
+    //       .split(':')[1]
+    //       .split(',')[0]
+    //       .replace(/"/g, '')
+    //   : '';
 
-      //서버용
-      // const response = await getUserInfo();
+    // const response = await testGetUserInfo(name);
 
-      const { data } = response.data;
-      const userInfo = {
-        ...data,
-        userImage: `https://cdn.intra.42.fr/users/${data.username}.jpg`,
-      };
-      setUserInfo(userInfo);
+    //서버용;
+    const response = await getUserInfo();
+
+    const { data } = response.data;
+    const userInfo = {
+      ...data,
+      userImage: `https://cdn.intra.42.fr/users/${data.username}.jpg`,
     };
+    setUserInfo(userInfo);
+  };
 
-    if (document.cookie) {
-      //쿠키가 있으면 로그인 상태 -> 해당 쿠키값의(로그인한 유저의 ) 데이터를 가져온다
-      setLogin();
-      fetchedData();
-    } else {
-      //로그인 아닌 상태 home으로 리다이렉트
-      history.push('/');
-    }
-  }, []);
+  useEffect(() => {
+    fetchedData();
+
+    console.log('fetchedData', userInfo);
+  }, [userStatus]);
+
+  useEffect(() => {
+    if (!document.cookie) history.push('/');
+    //쿠키가 있으면 로그인 상태 -> 해당 쿠키값의(로그인한 유저의 ) 데이터를 가져온다
+    setLogin();
+    fetchedData();
+  }, [history]);
 
   return (
     <>
@@ -157,7 +163,7 @@ function CheckInOutPage() {
             <span className={styles.box}>체크인 시간: {checkInTime}</span>
             <div className={styles.cardInfo}>
               <span className={styles.cardTitle}>CARD NUMBER</span>
-              <h2 className={styles.cardNumber}>{userCardNumber}</h2>
+              <h2 className={styles.cardNumber}>{userInfo.cardNumber}</h2>
             </div>
             <div className={styles.btnWrap}>
               <div className={styles.checkWrap}>

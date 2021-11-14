@@ -17,7 +17,7 @@ export const testGetUserInfo = async (name: string | null) => {
 };
 
 export const getUserInfo = async () => {
-  return await instance.get('/user/token');
+  return await instance.get('/status');
 };
 
 export const getClusterStatus = async () => {
@@ -35,6 +35,5 @@ export const checkOut = async () => {
 };
 
 export const setCookie = async (name: string | null) => {
-  console.log('setcookie', name);
   return await instance.get(`mock-make-token/${name}`);
 };

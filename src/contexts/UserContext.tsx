@@ -9,18 +9,20 @@ export type Props = {
 const initialState = {
   username: '',
   userCursus: '',
-  cardNumber: null,
+  cardNumber: '',
   userImage: userDefault,
-  createdAt: null,
+  checkIn: '',
+  checkOut: '',
   isLogin: false,
 };
 
 export type UserState = {
   username: string;
   userCursus: string;
-  cardNumber: null | number;
+  cardNumber: null | number | string;
   userImage: string;
-  createdAt: null | Date;
+  checkIn: null | string | Date;
+  checkOut: null | string | Date;
   isLogin: boolean;
 };
 
