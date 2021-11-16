@@ -12,6 +12,10 @@ import {
   useUserDispatch,
   useUserState,
 } from '../contexts/UserContext';
+import {
+  useClusterDispatch,
+  getCluster,
+} from '../contexts/ClusterContext';
 import { checkIn, checkOut, getUserInfo } from '../api/api';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -31,17 +35,26 @@ const handleTimeFormat = (date: string | Date): string => {
 
 function CheckInOutPage() {
   /* UserContext*/
-  const dispatch = useUserDispatch();
+  const userDispatch = useUserDispatch();
   const userInfo = useUserState();
   const setLogin = useCallback(() => {
-    dispatch({ type: 'SET_LOGIN' });
-  }, [dispatch]);
+    userDispatch({ type: 'SET_LOGIN' });
+  }, [userDispatch]);
   const setLogout = useCallback(() => {
-    dispatch({ type: 'SET_LOGOUT' });
-  }, [dispatch]);
-  const setUserInfo = useCallback((userInfo: UserState) => {
-    dispatch({ type: 'SET_USER_INFO', userInfo });
-  }, [dispatch]);
+    userDispatch({ type: 'SET_LOGOUT' });
+  }, [userDispatch]);
+  const setUserInfo = useCallback(
+    (userInfo: UserState) => {
+      userDispatch({ type: 'SET_USER_INFO', userInfo });
+    },
+    [userDispatch],
+  );
+
+  //ClusterContext
+  const clusterDispatch = useClusterDispatch();
+  const fetchClusterData = useCallback(() => {
+    getCluster(clusterDispatch);
+  }, [clusterDispatch]);
 
   const history = useHistory();
   const [isChecked, setChecked] = useState(false);
@@ -59,7 +72,8 @@ function CheckInOutPage() {
       //벡에서 요청시 올바른 카드넘버가 맞으면 checkIN 아니면 올바른 카드넘버가 아닙니다 띄우기.
       await checkIn(cardNumber);
       setChecked(!isChecked);
-      fetchedData();
+      fetchUserData();
+      fetchClusterData();
     } catch (e) {
       console.warn(e);
     }
@@ -70,7 +84,8 @@ function CheckInOutPage() {
     await checkOut();
     setChecked(!isChecked);
     setcardNumber(null);
-    fetchedData();
+    fetchUserData();
+    fetchClusterData();
   };
 
   const handleChecked = (e: any) => {
@@ -86,7 +101,7 @@ function CheckInOutPage() {
     setcardNumber(e.target.value);
   };
 
-  const fetchedData = useCallback(async () => {
+  const fetchUserData = useCallback(async () => {
     // local 테스트시 필요
     // const name = document.cookie
     //   ? decoding(getTokenInCookie())
@@ -118,9 +133,10 @@ function CheckInOutPage() {
       history.push('/');
       setLogout();
     }
-    fetchedData();
+    fetchUserData();
+    fetchClusterData();
     setLogin();
-  }, [fetchedData, history, setLogin, setLogout]);
+  }, [fetchUserData, fetchClusterData, history, setLogin, setLogout]);
 
   return (
     <>
