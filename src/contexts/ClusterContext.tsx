@@ -68,9 +68,7 @@ const reducer = (state: ClusterState, action: Action): ClusterState => {
 
 // Context 만들기
 const ClusterStateContext = createContext<null | ClusterState>(null);
-const ClusterDispatchContext = createContext<null | ClusterDispatch>(
-  () => null,
-);
+const ClusterDispatchContext = createContext<null | ClusterDispatch>(null);
 
 // API를 요청하는 함수
 export const getCluster = async (dispatch: React.Dispatch<Action>) => {
@@ -104,10 +102,12 @@ export const ClusterProvider = ({ children }: Props) => {
 // state, dispatch 를 잘 쓰기위한 커스텀 hook
 export const useClusterState = () => {
   const ClusterState = useContext(ClusterStateContext);
+  if (!ClusterState) throw new Error('Cannot find ClusterProvider'); 
   return ClusterState;
 };
 
 export const useClusterDispatch = () => {
   const ClusterDispatch = useContext(ClusterDispatchContext);
+  if (!ClusterDispatch) throw new Error('Cannot find ClusterProvider');
   return ClusterDispatch;
 };
