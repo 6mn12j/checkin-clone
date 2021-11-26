@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 import styles from '../styles/CheckInOutPage.module.css';
 
 import Card from '../components/Card';
@@ -12,10 +12,13 @@ import {
   useUserDispatch,
   useUserState,
 } from '../contexts/UserContext';
-import { checkIn, checkOut, getUserInfo, testGetUserInfo } from '../api/api';
+import {
+  useClusterDispatch,
+  getCluster,
+} from '../contexts/ClusterContext';
+import { checkIn, checkOut, getUserInfo } from '../api/api';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { decoding, getTokenInCookie } from '../utils/utils';
 
 const handleTimeFormat = (date: string | Date): string => {
   if (date === null) return '';
@@ -32,20 +35,32 @@ const handleTimeFormat = (date: string | Date): string => {
 
 function CheckInOutPage() {
   /* UserContext*/
-  const dispatch = useUserDispatch();
+  const userDispatch = useUserDispatch();
   const userInfo = useUserState();
-  const setLogin = () => {
-    dispatch({ type: 'SET_LOGIN' });
-  };
-  const setUserInfo = (userInfo: UserState) => {
-    dispatch({ type: 'SET_USER_INFO', userInfo });
-  };
+  const setLogin = useCallback(() => {
+    userDispatch({ type: 'SET_LOGIN' });
+  }, [userDispatch]);
+  const setLogout = useCallback(() => {
+    userDispatch({ type: 'SET_LOGOUT' });
+  }, [userDispatch]);
+  const setUserInfo = useCallback(
+    (userInfo: UserState) => {
+      userDispatch({ type: 'SET_USER_INFO', userInfo });
+    },
+    [userDispatch],
+  );
+
+  //ClusterContext
+  const clusterDispatch = useClusterDispatch();
+  const fetchClusterData = useCallback(() => {
+    getCluster(clusterDispatch);
+  }, [clusterDispatch]);
 
   const history = useHistory();
   const [isChecked, setChecked] = useState(false);
   const [detailIsVisible, setDetailIsVisible] = useState(false);
-  const [userStatus, setUserStatus] = useState('in'); //userinfo의 cardNumber값으로 대체
-  const [cardNumber, setcardNumber] = useState();
+  // const [userStatus, setUserStatus] = useState('in'); //userinfo의 cardNumber값으로 대체
+  const [cardNumber, setcardNumber] = useState(null);
 
   const checkInTime = useMemo(() => {
     if (userInfo.checkIn !== null) return handleTimeFormat(userInfo.checkIn);
@@ -57,7 +72,8 @@ function CheckInOutPage() {
       //벡에서 요청시 올바른 카드넘버가 맞으면 checkIN 아니면 올바른 카드넘버가 아닙니다 띄우기.
       await checkIn(cardNumber);
       setChecked(!isChecked);
-      setUserStatus('out');
+      fetchUserData();
+      fetchClusterData();
     } catch (e) {
       console.warn(e);
     }
@@ -68,7 +84,8 @@ function CheckInOutPage() {
     await checkOut();
     setChecked(!isChecked);
     setcardNumber(null);
-    setUserStatus('in');
+    fetchUserData();
+    fetchClusterData();
   };
 
   const handleChecked = (e: any) => {
@@ -84,7 +101,7 @@ function CheckInOutPage() {
     setcardNumber(e.target.value);
   };
 
-  const fetchedData = async () => {
+  const fetchUserData = useCallback(async () => {
     // local 테스트시 필요
     // const name = document.cookie
     //   ? decoding(getTokenInCookie())
@@ -96,35 +113,37 @@ function CheckInOutPage() {
     // const response = await testGetUserInfo(name);
 
     //서버용;
-    const response = await getUserInfo();
-
-    const { data } = response.data;
-    const userInfo = {
-      ...data,
-      userImage: `https://cdn.intra.42.fr/users/${data.username}.jpg`,
-    };
-    setUserInfo(userInfo);
-  };
-
-  useEffect(() => {
-    fetchedData();
-
-    console.log('fetchedData', userInfo);
-  }, [userStatus]);
+    try {
+      const response = await getUserInfo();
+      const { data } = response.data;
+      const userInfo = {
+        ...data,
+        isLogin: true,
+      };
+      setUserInfo(userInfo);
+      console.log('fetchedData', userInfo);
+    } catch (e) {
+      console.log(e);
+    }
+  }, [setUserInfo]);
 
   useEffect(() => {
-    if (!document.cookie) history.push('/');
     //쿠키가 있으면 로그인 상태 -> 해당 쿠키값의(로그인한 유저의 ) 데이터를 가져온다
+    if (!document.cookie) {
+      history.push('/');
+      setLogout();
+    }
+    fetchUserData();
+    fetchClusterData();
     setLogin();
-    fetchedData();
-  }, [history]);
+  }, [fetchUserData, fetchClusterData, history, setLogin, setLogout]);
 
   return (
     <>
       <header className={styles.subHeader}>CHECK IN</header>
       <ClusterStatusBoard />
       <Card>
-        {userStatus === 'in' ? (
+        {!userInfo.cardNumber ? (
           <>
             <UserProfile />
             <div className={styles.box}>

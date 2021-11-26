@@ -16,10 +16,6 @@ export const testGetUserInfo = async (name: string | null) => {
   return await instance.get(`/user?username=${name}`);
 };
 
-export const getToken = async () => {
-  return await instance.get('/user/token');
-};
-
 export const getUserInfo = async () => {
   return await instance.get('/status');
 };
